@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: api-traffic-splitter
+spec:
+  hosts:
+  - "api.company.internal"
+  http:
+  - route:
+    - destination:
+        host: api-service
+        subset: v1
+      weight: 90
+    - destination:
+        host: api-service
+        subset: v2
+      weight: 10
